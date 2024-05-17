@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<FrameworkConfiguration>
+	<Configuration>
+		<ImplicitTimeout>60</ImplicitTimeout>
+		<URL>https://www.amazon.in/</URL>
+		<DOCKER_GRID_URL>http://localhost:4444</DOCKER_GRID_URL>
+	</Configuration>
+</FrameworkConfiguration>
