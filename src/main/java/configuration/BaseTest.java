@@ -26,8 +26,9 @@ public class BaseTest extends TestListenerAdapter {
 
 		// Open browser
 		try {
-			int limit = Integer.parseInt(fwConfigData.get("Configuration", "ImplicitTimeout"));
-			bdriver = new BaseDriver(browser, limit, outputDir);
+			int implicitTimeout = Integer.parseInt(fwConfigData.get("Configuration", "ImplicitTimeout"));
+			int explicitTimeout = Integer.parseInt(fwConfigData.get("Configuration", "ExplicitTimeout"));
+			bdriver = new BaseDriver(browser, implicitTimeout,explicitTimeout, outputDir);
 			String url = fwConfigData.get("Configuration", "URL");
 			bdriver.gotoUrl(url);
 		}

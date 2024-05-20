@@ -2,6 +2,7 @@
 <FrameworkConfiguration>
 	<Configuration>
 		<ImplicitTimeout>60</ImplicitTimeout>
+		<ExplicitTimeout>60</ExplicitTimeout>
 		<URL>https://www.amazon.in/</URL>
 		<DOCKER_GRID_URL>http://localhost:4444</DOCKER_GRID_URL>
 	</Configuration>
