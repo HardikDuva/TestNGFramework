@@ -8,11 +8,11 @@ import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
 
-public class AmazonLoginPage extends AbstractionPOM{
+public class AmazonSignInPage extends AbstractionPOM{
 
     public static String GoToUrl = null;
 
-    public AmazonLoginPage(BaseDriver bdriver) {
+    public AmazonSignInPage(BaseDriver bdriver) {
         super(bdriver);
     }
 
@@ -33,7 +33,7 @@ public class AmazonLoginPage extends AbstractionPOM{
     private WebElement PasswordInput;
 
     //will Navigate to Amazon Home Page
-    public void LoginIn(String emailId,String password) {
+    public void signIn(String emailId,String password) {
         try {
             bdriver.waitForElementVisible(EmailIdInput);
             bdriver.inputText(EmailIdInput,emailId);

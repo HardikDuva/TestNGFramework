@@ -1,0 +1,36 @@
+version: "3"                                                              # The version of this yml document
+services:                                                                   # The services this docker composition will require
+  selenium-hub:
+    container_name: selenium-hub                                            # The name of this container
+    image: selenium/hub:latest                                              # The image where the Selenium Hub resides
+    ports:
+      - "4442:4442"                                                         # The port where Selenium will handle publish requests
+      - "4443:4443"                                                         # The port that Selenium will handle subscribe requests
+      - "4444:4444"                                                         # The port that Selenium will register nodes with
+      - "5555:5555"                                                         # This is the port that the dynamic node and appium nodes use
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "http://localhost:4444/grid/api/proxy"] 
+      interval: 10s
+      timeout: 30s
+      retries: 5
+
+  dynamic-node:
+    image: selenium/node-docker:latest                                       # the image where the Selenium Dynamic Node resides
+    shm_size: 2gb
+    volumes:
+      - ./dynamic_grid.toml:/opt/bin/config.toml                            # the selenium grid hub config file for the relay node
+      - /var/run/docker.sock:/var/run/docker.sock                           # the mandatory docker socket connection
+      - ./../_logs/webdriver_logs:/opt/selenium/assets
+    depends_on:
+      - selenium-hub                                                        # the host where the selenium grid exists
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub                                      # the host where the selenium grid exists
+      - SE_EVENT_BUS_PUBLISH_PORT=4442                                      # the port where selenium nodes publish to the grid
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443                                    # the port where selenium nodes subscribe to the grid
+    deploy:
+      replicas: 4
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "http://localhost:5555"]
+      interval: 10s
+      timeout: 30s
+      retries: 5

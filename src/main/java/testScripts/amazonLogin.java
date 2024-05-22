@@ -14,7 +14,13 @@ public class amazonLogin extends BaseTest {
 
 	@Test(enabled = true)
 	public void LoginIntoAmazon()  {
-
+		try {
+			ObAmazonSignIn().clickOnSignInButton();
+			ObAmazonSignIn().signIn(UserName,Password);
+		}
+		catch (Exception e) {
+			logger.e("Tcs Failed");
+		}
 	}
 }
 

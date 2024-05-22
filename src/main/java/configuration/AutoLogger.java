@@ -1,5 +1,7 @@
 package configuration;
 
+import org.testng.Assert;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -81,8 +83,9 @@ public class AutoLogger {
 				break;
 			case ERROR:
 				printmsg+="\n";
-				printmsg+="Fail As:-**************************************";
+				printmsg+="Fail As:-******* ";
 				printmsg+=msg;
+				/*Assert.fail(printmsg);*/
 				break;
 		}
 
